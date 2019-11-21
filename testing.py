@@ -39,7 +39,7 @@ for i in range(nSpeaker):
         (i + 1),
         " pasuje do mówcy ",
         (sp_mfcc + 1),
-        " przy wykożystaniu metody MFCC",
+        " przy wykorzystaniu metody MFCC",
     )
     if i == sp_mfcc:
         nCorrect_MFCC += 1
