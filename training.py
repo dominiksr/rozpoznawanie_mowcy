@@ -27,7 +27,7 @@ for i in range(nSpeaker):
 
     # Zastosowanie metody trenującej.
     mel_coeff = mfcc(s, fs, nfiltbank)
-"""
+#"""
     # Tworzenei wykresu.
     plt.figure(i)
     plt.title(
@@ -39,4 +39,4 @@ for i in range(nSpeaker):
 
     for j in range(nCentroid):
         ax1.stem(codebooks_mfcc[i, :, j], use_line_collection=True)
-"""
+#"""
