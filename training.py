@@ -20,14 +20,14 @@ directory = os.getcwd() + "/train"
 # Pętla wczytania pliku, trenowania i pokazywania wykresu.
 for i in range(nSpeaker):
     fname = "/s" + str(i + 1) + ".wav"
-    print("Plik mówcy ", str(i + 1), "jest trenowany.")
+    print("Trenowany mówca nr: ", str(i + 1))
 
     # Wczytanie pliku.
     (fs, s) = read(directory + fname)
 
     # Zastosowanie metody trenującej.
     mel_coeff = mfcc(s, fs, nfiltbank)
-
+"""
     # Tworzenei wykresu.
     plt.figure(i)
     plt.title(
@@ -39,3 +39,4 @@ for i in range(nSpeaker):
 
     for j in range(nCentroid):
         ax1.stem(codebooks_mfcc[i, :, j], use_line_collection=True)
+"""

@@ -46,4 +46,4 @@ for i in range(nSpeaker):
 
 # Wypisanie zgodności procentowej.
 zgodn_proc_MFCC = (nCorrect_MFCC / nSpeaker) * 100
-print("Accuracy of result for training with MFCC is ", zgodn_proc_MFCC, "%")
+print("Zgodnoność procentowa dla wybranych plików:  ", zgodn_proc_MFCC, "%")

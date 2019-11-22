@@ -13,15 +13,14 @@ def EUDistance(d, c):
     if n < p:
         for i in range(n):
             copies = np.transpose(np.tile(d[:, i], (p, 1)))
-            distance[i, :] = np.sum((copies - c) ** 2, 0)
+            distance[i, :] = np.sum((copies - c) ** 2, 0)   
     else:
         for i in range(p):
             copies = np.transpose(np.tile(c[:, i], (n, 1)))
-            distance[:, i] = np.transpose(np.sum((d - copies) ** 2, 0))
+            distance[:, i] = np.transpose(np.sum((d - copies) ** 2, 0))  #RuntimeWarning;
     distance = np.sqrt(distance)
 
     return distance
-
 
 # Metoda LBG.
 def lbg(cechy, M):
@@ -59,9 +58,9 @@ def lbg(cechy, M):
                     cechy[:, np.where(najblizszy_codebook == i)], 2
                 ).T
 
-            # replace all NaN values with 0
+            # Zamien wszystkie NaN na 0
             codebook = np.nan_to_num(codebook)
-            # print 'this codebook', codebook
+            # Pokaż 'this codebook', codebook
             D = EUDistance(cechy, codebook)
             distortion = (poprzedni_distance - np.mean(D)) / poprzedni_distance
 
