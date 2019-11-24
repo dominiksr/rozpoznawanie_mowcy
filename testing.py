@@ -1,11 +1,10 @@
-# Testowanie mówców i wyświetlanie wyników.
+ # Testowanie mówców i wyświetlanie wyników.
 import numpy as np
 from training import codebooks_mfcc, nSpeaker, nfiltbank
 from LBG import EUDistance
 from scipy.io.wavfile import read
 from Metoda_MFCC import mfcc
 import os
-
 
 # Dane początkowe.
 # Wskazanie katalogu gdzie przechowywane są pliki do testowania.

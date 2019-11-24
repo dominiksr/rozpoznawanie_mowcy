@@ -22,7 +22,7 @@ def EUDistance(d, c):
 
     return distance
 
-# Metoda LBG.
+# algorytm LBG.
 def lbg(cechy, M):
     eps = 0.01
     codebook = np.mean(cechy, 1)

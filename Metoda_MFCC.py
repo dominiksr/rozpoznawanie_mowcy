@@ -16,8 +16,8 @@ def mel_to_hertz(m):
 
 # Filtr częstotliwości mel.
 def mel_filterbank(nfft, nfiltbank, fs):
-    low_mel = hertz_to_mel(200)  # Dolna granica.
-    upp_mel = hertz_to_mel(7000)  # Górna granica.
+    low_mel = hertz_to_mel(300)  # Dolna granica.200
+    upp_mel = hertz_to_mel(8000)  # Górna granica.7000
 
     # Zwraca liczbę równomiernie rozmieszczonych próbek,
     # obliczonych dla przedziału low_mel - upp_mel.
@@ -64,7 +64,7 @@ def mfcc(s, fs, nfiltbank):
         start = (nSamples - overlap) * i
 
     # Periodogram.
-    nfft = 1024
+    nfft = 512 #1024
     periodogram = np.empty((nFrames, int(nfft / 2 + 1)))
     for i in range(nFrames):
         # Użycie okna Hamminga. To stożek utworzony przy użyciu
