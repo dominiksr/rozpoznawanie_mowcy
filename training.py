@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Dane początkowe.
-nSpeaker = 4
+nSpeaker = 7
 nCentroid = 16
 nfiltbank = 12
 
@@ -45,6 +45,3 @@ for i in range(nSpeaker):
 
 plt.show()
 print('Trening zakończono. Przejście do dopasowywania mówców. ')
-
-codebooks = np.empty((2, nfiltbank, nCentroid))             #Joanna bin
-mel_coeff = np.empty((2, nfiltbank, 68))                    #Joanna bin
