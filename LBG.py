@@ -17,15 +17,13 @@ def EUDistance(d, c):
     else:
         for i in range(p):
             copies = np.transpose(np.tile(c[:, i], (n, 1)))
-            distance[:, i] = np.transpose(
-                np.sum((d - copies) ** 2, 0)
-            )  # RuntimeWarning;
+            distance[:, i] = np.transpose(np.sum((d - copies) ** 2, 0))
     distance = np.sqrt(distance)
 
     return distance
 
 
-# algorytm LBG.
+# Algorytm LBG.
 def lbg(cechy, M):
     eps = 0.02
     codebook = np.mean(cechy, 1)
@@ -45,13 +43,12 @@ def lbg(cechy, M):
 
         codebook = nowy_codebook
         nCentroid = np.shape(codebook)[1]
-        D = EUDistance(cechy, codebook)
+        distance = EUDistance(cechy, codebook)
 
         while np.abs(distortion) > eps:
-
             # Wyszukiwanie najbliższego sąsiada.
-            poprzedni_distance = np.mean(D)
-            najblizszy_codebook = np.argmin(D, axis=1)
+            poprzedni_distance = np.mean(distance)
+            najblizszy_codebook = np.argmin(distance, axis=1)
 
             # Grupowanie wektorów i szukanie nowego centroidu.
             for i in range(nCentroid):
@@ -61,10 +58,11 @@ def lbg(cechy, M):
                     cechy[:, np.where(najblizszy_codebook == i)], 2
                 ).T
 
-            # Zamien wszystkie NaN na 0
+            # Zamien wszystkie NaN na 0.
             codebook = np.nan_to_num(codebook)
-            # Pokaż 'this codebook', codebook
-            D = EUDistance(cechy, codebook)
-            distortion = (poprzedni_distance - np.mean(D)) / poprzedni_distance
+
+            # Obliczanie odległości euklidesowej.
+            distance = EUDistance(cechy, codebook)
+            distortion = (poprzedni_distance - np.mean(distance)) / poprzedni_distance
 
     return codebook

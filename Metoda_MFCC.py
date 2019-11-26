@@ -46,12 +46,12 @@ def mel_filterbank(nfft, nfiltbank, fs):
 
 
 def mfcc(s, fs, nfiltbank):
-    # Podział na klatki 30 ms + 5 ms nakładu. Raczej powinno być 25 + 10.
+    # Podział na klatki 30 ms + 5 ms nakładu. Przedział 20-40 ms klatki.
     klatka = 0.03
     naklad = 0.005
-    nSamples = np.intc(klatka * fs)
-    overlap = np.intc(naklad * fs)
-    nFrames = np.intc(np.ceil(len(s) / (nSamples - overlap)))
+    nSamples = int(klatka * fs)
+    overlap = int(naklad * fs)
+    nFrames = int(np.ceil(len(s) / (nSamples - overlap)))
 
     # Wypełnienie, by długość sygnału była wystarczająca,
     # aby uzyskać ilość ramek równą nFrame.

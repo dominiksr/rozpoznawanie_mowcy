@@ -17,7 +17,6 @@ codebooks_mfcc = np.empty((nSpeaker, nfiltbank, nCentroid))
 
 # Wskazanie katalogu gdzie przechowywane są pliki do trenowania.
 directory = os.getcwd() + "/train"
-# fname = str()                                                  #Joanna BIN
 
 # Pętla wczytania pliku, trenowania i pokazywania wykresu.
 for i in range(nSpeaker):
@@ -29,7 +28,6 @@ for i in range(nSpeaker):
 
     # Zastosowanie metody trenującej.
     mel_coeff = mfcc(s, fs, nfiltbank)
-
     codebooks_mfcc[i, :, :] = lbg(mel_coeff, nCentroid)  ####Joanna changed
 
     # Tworzenei wykresu.
@@ -42,7 +40,12 @@ for i in range(nSpeaker):
     plt.ylabel("MFCC")
 
     for j in range(nCentroid):
-        ax1.stem(codebooks_mfcc[i, :, j], use_line_collection=True)
+        ax1.stem(
+            codebooks_mfcc[i, :, j],
+            use_line_collection=True,
+            linefmt="C2-.",
+            markerfmt="C8o",
+        )
 # Ustawienie na False powoduje że program się nie zatrzymuje ale nie widać wykresów.
 plt.show(block=True)
 print("Trening zakończono. Przejście do dopasowywania mówców. ")
