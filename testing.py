@@ -5,6 +5,7 @@ from training import codebooks_mfcc, nSpeaker, nfiltbank
 from LBG import EUDistance
 from scipy.io.wavfile import read
 from Metoda_MFCC import mfcc
+from playsound import playsound
 
 # Dane początkowe.
 # Wskazanie katalogu gdzie przechowywane są pliki do testowania.
@@ -38,6 +39,9 @@ for i in range(nSpeaker):
     )
     if i == sp_mfcc:
         nCorrect_MFCC += 1
+
+    # Odtwarzanie dźwięku.
+    playsound(directory + fname)
 
 # Wypisanie zgodności procentowej.
 zgodn_proc_MFCC = (nCorrect_MFCC / nSpeaker) * 100

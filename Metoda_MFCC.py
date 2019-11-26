@@ -46,7 +46,7 @@ def mel_filterbank(nfft, nfiltbank, fs):
 
 
 def mfcc(s, fs, nfiltbank):
-    # Podział na klatki 30 ms + 5 ms nakładu.
+    # Podział na klatki 30 ms + 5 ms nakładu. Raczej powinno być 25 + 10.
     klatka = 0.03
     naklad = 0.005
     nSamples = np.intc(klatka * fs)

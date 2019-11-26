@@ -43,6 +43,6 @@ for i in range(nSpeaker):
 
     for j in range(nCentroid):
         ax1.stem(codebooks_mfcc[i, :, j], use_line_collection=True)
-
-plt.show()
+# Ustawienie na False powoduje że program się nie zatrzymuje ale nie widać wykresów.
+plt.show(block=True)
 print("Trening zakończono. Przejście do dopasowywania mówców. ")
