@@ -15,9 +15,12 @@ def mel_to_hertz(m):
 
 
 # Filtr częstotliwości mel.
+# Częstotliwość podstawowa leży w zakresie 100-120 Hz w przypadku mężczyzn.
 def mel_filterbank(nfft, nfiltbank, fs):
-    low_mel = hertz_to_mel(300)  # Dolna granica.200
-    upp_mel = hertz_to_mel(8000)  # Górna granica.7000
+    gr_dolna = 100
+    gr_gorna = 9000
+    low_mel = hertz_to_mel(gr_dolna)
+    upp_mel = hertz_to_mel(gr_gorna)
 
     # Zwraca liczbę równomiernie rozmieszczonych próbek,
     # obliczonych dla przedziału low_mel - upp_mel.
@@ -43,16 +46,18 @@ def mel_filterbank(nfft, nfiltbank, fs):
 
 
 def mfcc(s, fs, nfiltbank):
-    # Podział na segmenty, 25 ms + 10 ms overlap.
-    nSamples = np.intc(0.025 * fs)
-    overlap = np.intc(0.01 * fs)
+    # Podział na klatki 30 ms + 5 ms nakładu.
+    klatka = 0.03
+    naklad = 0.005
+    nSamples = np.intc(klatka * fs)
+    overlap = np.intc(naklad * fs)
     nFrames = np.intc(np.ceil(len(s) / (nSamples - overlap)))
 
     # Wypełnienie, by długość sygnału była wystarczająca,
     # aby uzyskać ilość ramek równą nFrame.
-    padding = ((nSamples - overlap) * nFrames) - len(s)
-    if padding > 0:
-        signal = np.append(s, np.zeros(padding))
+    wypelnienie = ((nSamples - overlap) * nFrames) - len(s)
+    if wypelnienie > 0:
+        signal = np.append(s, np.zeros(wypelnienie))
     else:
         signal = s
 
@@ -64,7 +69,7 @@ def mfcc(s, fs, nfiltbank):
         start = (nSamples - overlap) * i
 
     # Periodogram.
-    nfft = 512 #1024
+    nfft = 512  # 1024
     periodogram = np.empty((nFrames, int(nfft / 2 + 1)))
     for i in range(nFrames):
         # Użycie okna Hamminga. To stożek utworzony przy użyciu

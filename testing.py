@@ -1,10 +1,10 @@
- # Testowanie mówców i wyświetlanie wyników.
+# Testowanie mówców i wyświetlanie wyników.
+import os
 import numpy as np
 from training import codebooks_mfcc, nSpeaker, nfiltbank
 from LBG import EUDistance
 from scipy.io.wavfile import read
 from Metoda_MFCC import mfcc
-import os
 
 # Dane początkowe.
 # Wskazanie katalogu gdzie przechowywane są pliki do testowania.
@@ -34,11 +34,7 @@ for i in range(nSpeaker):
     mel_coefs = mfcc(s, fs, nfiltbank)
     sp_mfcc = minDistance(mel_coefs, codebooks_mfcc)
     print(
-        "Mówca ",
-        (i + 1),
-        " pasuje do mówcy ",
-        (sp_mfcc + 1),
-       
+        "Mówca ", (i + 1), " pasuje do mówcy ", (sp_mfcc + 1),
     )
     if i == sp_mfcc:
         nCorrect_MFCC += 1

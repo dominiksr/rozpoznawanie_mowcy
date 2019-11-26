@@ -1,9 +1,9 @@
-# Wektor kwantyzacji używając metody LBG. Tworzy codebook
+# Wektor kwantyzacji używając metody LBG. Tworzy codebook (słownik)
 # odpowiednio grupując dane.
 import numpy as np
 
 
-# Obliczanie odległości euklidesowej pomiędzy euklidesową dwiema macierzami.
+# Obliczanie odległości euklidesowej pomiędzy dwiema macierzami.
 def EUDistance(d, c):
 
     # Tworzenie zmiennych przechowywujących wymiar macierzy.
@@ -13,18 +13,21 @@ def EUDistance(d, c):
     if n < p:
         for i in range(n):
             copies = np.transpose(np.tile(d[:, i], (p, 1)))
-            distance[i, :] = np.sum((copies - c) ** 2, 0)   
+            distance[i, :] = np.sum((copies - c) ** 2, 0)
     else:
         for i in range(p):
             copies = np.transpose(np.tile(c[:, i], (n, 1)))
-            distance[:, i] = np.transpose(np.sum((d - copies) ** 2, 0))  #RuntimeWarning;
+            distance[:, i] = np.transpose(
+                np.sum((d - copies) ** 2, 0)
+            )  # RuntimeWarning;
     distance = np.sqrt(distance)
 
     return distance
 
+
 # algorytm LBG.
 def lbg(cechy, M):
-    eps = 0.01
+    eps = 0.02
     codebook = np.mean(cechy, 1)
     distortion = 1
     nCentroid = 1
